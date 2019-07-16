@@ -1,10 +1,6 @@
-require './lib/game'
+require 'game'
+require 'board'
 require 'stringio'
-
-# before(:each) do
-#     @game = Board.new
-#     @board1 = double('board')
-# end
 
 RSpec.describe Game do
   describe '#switch_turn' do
@@ -36,11 +32,37 @@ RSpec.describe Game do
       allow($stdin).to receive(:gets).and_return('y')
       expect(game.ask_sameplayers).to eql(true)
     end
-    it 'Will return false if N' do
+    it 'Will return nil if invalid input' do
         game = Game.new
         game.ask_sameplayers
-        allow($stdin).to receive(:gets).and_return('N')
-        expect(game.ask_sameplayers).to eql(false)
+        allow($stdin).to receive(:gets).and_return('klajslfja')
+        expect(game.ask_sameplayers).to eql(nil)
       end
+    
+  end
+
+  describe '#ask_play_again' do
+    before do
+      $stdin = StringIO.new('Y')
+    end
+    it 'Will return true if Y' do
+      game = Game.new
+      game.ask_playagain
+      allow($stdin).to receive(:gets).and_return('Y')
+      expect(game.ask_playagain).to eql(true)
+    end
+    it 'Will return true if y' do
+      game = Game.new
+      game.ask_playagain
+      allow($stdin).to receive(:gets).and_return('n')
+      expect(game.ask_playagain).to eql(false)
+    end
+    it 'Will return nil if invalid input' do
+        game = Game.new
+        game.ask_playagain
+        allow($stdin).to receive(:gets).and_return('klajslfja')
+        expect(game.ask_playagain).to eql(nil)
+      end
+    
   end
 end

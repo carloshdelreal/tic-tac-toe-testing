@@ -1,4 +1,3 @@
-require './lib/board.rb'
 class Game
     attr_accessor :players, :board, :turn_toplay
     attr_reader :symbols
@@ -97,30 +96,30 @@ class Game
       @playermoves = [[], []]
     end
     def ask_playagain
-      loop do
-          puts 'Do you want to play again? Y/N'
-          playagain_ans = gets.chomp
-          if playagain_ans.upcase == 'Y'
-            return true
-          elsif playagain_ans.upcase == 'N'
-            return false
-          else
-            puts 'Invalid Response'
-          end
+      puts 'Do you want to play again? Y/N'
+      playagain_ans = gets.chomp
+      if playagain_ans.upcase == 'Y'
+        return true
+      elsif playagain_ans.upcase == 'N'
+        return false
+      else
+        banner_msg('Invalid Response')
+        return nil
       end
     end
     def ask_sameplayers
-      loop do
-          puts 'Play with the same Players Y/N'
-          sameplayers_ans = gets.chomp
-          if sameplayers_ans.upcase == 'Y'
-              return true
-          elsif sameplayers_ans.upcase == 'N'
-              return false
-          else
-              puts 'Invalid Response'
-          end
-        end
+      
+      puts 'Play with the same Players Y/N'
+      sameplayers_ans = gets.chomp
+      if sameplayers_ans.upcase == 'Y'
+          return true
+      elsif sameplayers_ans.upcase == 'N'
+          return false
+      else
+          banner_msg('Invalid Response')
+          return nil
+      end
+  
     end
   
   end
