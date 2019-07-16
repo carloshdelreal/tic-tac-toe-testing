@@ -78,4 +78,17 @@ RSpec.describe Game do
     expect(game.playermoves).to eql([[],[]])
   end
 end
+describe 'checking' do
+  it 'Will check if a player won the game' do
+  game=Game.new
+  
+  expect(game.board.checking([1,5,9])).to eql(true)
+  end
+  it 'Will check if a player won the game another combination' do
+    game=Game.new
+    
+    expect(game.board.checking([3,6,9])).to eql(true)
+    end
+
+end
 end
