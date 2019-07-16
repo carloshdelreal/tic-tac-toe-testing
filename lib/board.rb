@@ -3,6 +3,7 @@ class Board
   attr_accessor :board
   attr_reader :board_numbers
   attr_reader :winning
+  
   def initialize
     @board_numbers = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     @board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
