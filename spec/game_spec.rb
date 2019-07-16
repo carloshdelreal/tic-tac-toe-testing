@@ -91,4 +91,16 @@ describe 'checking' do
     end
 
 end
+describe '#no_int' do
+    it "There are not ints in the array" do
+      game = Game.new
+      game.board.board = [["X","X","O"],["X","X","O"],["X","X","O"]]
+      expect(game.board.draw).to eql(true)
+    end
+    it "There are not ints in the array" do
+      game = Game.new
+      game.board.board = [["X","X","O"],["X","X","O"],["X","X",9]]
+      expect(game.board.draw).to eql(false)
+    end
+  end
 end
