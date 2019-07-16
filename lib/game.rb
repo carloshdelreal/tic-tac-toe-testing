@@ -1,4 +1,4 @@
-require '../lib/board.rb'
+require './lib/board.rb'
 class Game
     attr_accessor :players, :board, :turn_toplay
     attr_reader :symbols
