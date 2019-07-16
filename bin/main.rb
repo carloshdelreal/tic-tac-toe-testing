@@ -1,3 +1,4 @@
+require '../lib/board'
 require '../lib/game.rb'
 
 game = Game.new
@@ -11,7 +12,7 @@ loop do
   if sameplayers == true
     game.reset_board
     game.play
-  else
+  elsif sameplayers == false
     game.reset_board
     game.welcome
     game.play
