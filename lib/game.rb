@@ -1,6 +1,7 @@
 class Game
     attr_accessor :players, :board, :turn_toplay
-    attr_reader :symbols
+    attr_reader :symbols, :playermoves
+
     def initialize
       @board = Board.new
       @players = []

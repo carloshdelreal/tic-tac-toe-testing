@@ -65,4 +65,17 @@ RSpec.describe Game do
       end
     
   end
+  describe '#reset_board' do
+    it 'Will check if board is reseted' do
+      game=Game.new
+      game.reset_board
+      expect(game.board.board).to eql([[1,2,3],[4,5,6],[7,8,9]])
+    end
+
+  it 'Will check if player moves are reseted' do
+    game=Game.new
+    game.reset_board
+    expect(game.playermoves).to eql([[],[]])
+  end
+end
 end
