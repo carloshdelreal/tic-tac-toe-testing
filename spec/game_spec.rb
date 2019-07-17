@@ -1,7 +1,3 @@
-require 'game'
-require 'board'
-require 'stringio'
-
 RSpec.describe Game do
   describe '#switch_turn' do
     it 'if given 0 return 1' do
@@ -33,12 +29,11 @@ RSpec.describe Game do
       expect(game.ask_sameplayers).to eql(true)
     end
     it 'Will return nil if invalid input' do
-        game = Game.new
-        game.ask_sameplayers
-        allow($stdin).to receive(:gets).and_return('klajslfja')
-        expect(game.ask_sameplayers).to eql(nil)
-      end
-    
+      game = Game.new
+      game.ask_sameplayers
+      allow($stdin).to receive(:gets).and_return('klajslfja')
+      expect(game.ask_sameplayers).to eql(nil)
+    end
   end
 
   describe '#ask_play_again' do
@@ -58,49 +53,10 @@ RSpec.describe Game do
       expect(game.ask_playagain).to eql(false)
     end
     it 'Will return nil if invalid input' do
-        game = Game.new
-        game.ask_playagain
-        allow($stdin).to receive(:gets).and_return('klajslfja')
-        expect(game.ask_playagain).to eql(nil)
-      end
-    
-  end
-  describe '#reset_board' do
-    it 'Will check if board is reseted' do
-      game=Game.new
-      game.reset_board
-      expect(game.board.board).to eql([[1,2,3],[4,5,6],[7,8,9]])
-    end
-
-  it 'Will check if player moves are reseted' do
-    game=Game.new
-    game.reset_board
-    expect(game.playermoves).to eql([[],[]])
-  end
-end
-describe 'checking' do
-  it 'Will check if a player won the game' do
-  game=Game.new
-  
-  expect(game.board.checking([1,5,9])).to eql(true)
-  end
-  it 'Will check if a player won the game another combination' do
-    game=Game.new
-    
-    expect(game.board.checking([3,6,9])).to eql(true)
-    end
-
-end
-describe '#no_int' do
-    it "There are not ints in the array" do
       game = Game.new
-      game.board.board = [["X","X","O"],["X","X","O"],["X","X","O"]]
-      expect(game.board.draw).to eql(true)
-    end
-    it "There are not ints in the array" do
-      game = Game.new
-      game.board.board = [["X","X","O"],["X","X","O"],["X","X",9]]
-      expect(game.board.draw).to eql(false)
+      game.ask_playagain
+      allow($stdin).to receive(:gets).and_return('klajslfja')
+      expect(game.ask_playagain).to eql(nil)
     end
   end
 end
