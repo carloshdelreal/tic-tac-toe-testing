@@ -12,24 +12,27 @@ RSpec.describe Board do
       expect(board.playermoves).to eql([[], []])
     end
   end
+
   describe 'checking' do
     it 'Will check if a player won the board' do
       board = Board.new
-
       expect(board.checking([1, 5, 9])).to eql(true)
     end
+
     it 'Will check if a player won the board another combination' do
       board = Board.new
 
       expect(board.checking([3, 6, 9])).to eql(true)
     end
   end
+
   describe '#no_int' do
     it 'There are not ints in the array' do
       game = Game.new
       game.board.board = [%w[X X O], %w[X X O], %w[X X O]]
       expect(game.board.draw).to eql(true)
     end
+    
     it 'There are not ints in the array' do
       game = Game.new
       game.board.board = [%w[X X O], %w[X X O], ['X', 'X', 9]]
