@@ -33,6 +33,13 @@ RSpec.describe Game do
       expect(game.ask_sameplayers).to eql(true)
     end
 
+    it 'Will return false if N' do
+      game = Game.new
+      game.ask_sameplayers
+      allow($stdin).to receive(:gets).and_return('N')
+      expect(game.ask_sameplayers).to eql(false)
+    end
+
     it 'Will return nil if invalid input' do
       game = Game.new
       game.ask_sameplayers
