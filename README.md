@@ -35,7 +35,7 @@ If you want a copy of this project running on your machine you have to install:
 
 # Instalation of This App
 
-Once you have installed the requiered packages shown on the [Required Installations](), proceed with the following steps
+Once you have installed the requiered packages shown on the [Required Installations](https://github.com/carloshdelreal/tic-tac-toe-testing/blob/master/README.md#required-installations), proceed with the following steps
 
 Clone the Repository, the folder toy_app will be downloaded
 
