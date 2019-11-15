@@ -3,4 +3,5 @@
 --require 'board'
 --require 'player'
 --require 'stringio'
+--require 'display'
 --format documentation

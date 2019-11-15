@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Game do
   describe '#switch_turn' do
     it 'if given 0 return 1' do
@@ -66,7 +68,7 @@ RSpec.describe Game do
       allow($stdin).to receive(:gets).and_return('n')
       expect(game.ask_playagain).to eql(false)
     end
-    
+
     it 'Will return nil if invalid input' do
       game = Game.new
       game.ask_playagain

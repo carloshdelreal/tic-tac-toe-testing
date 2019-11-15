@@ -34,6 +34,7 @@ class Board
     end
     false
   end
+
   def reset
     @played = []
   end
