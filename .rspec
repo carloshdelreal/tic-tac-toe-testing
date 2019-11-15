@@ -1,4 +1,6 @@
 --require spec_helper
 --require 'game'
 --require 'board'
+--require 'player'
 --require 'stringio'
+--format documentation
