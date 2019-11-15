@@ -3,6 +3,7 @@
 require '../lib/player'
 require '../lib/board'
 require '../lib/display'
+
 # Game class that implements the game
 class Game
   attr_accessor :players, :board, :turn_toplay
@@ -10,7 +11,7 @@ class Game
 
   def initialize
     @board = Board.new
-    @players = [Player.new, Player.new]
+    @players = []
     @display = Display.new
 
     @turn_toplay = 0 # it changes from 0 to 1 depending on the turn
@@ -23,8 +24,8 @@ class Game
       valid = next_move
       next unless valid
 
-      if @board.checking(@playermoves[@turn_toplay]) == true
-        banner_msg("The winner is #{@players[@turn_toplay]}")
+      if @board.winner?(@players[@turn_toplay].played) == true
+        banner_msg("The winner is #{@players[@turn_toplay].name}")
         break
       elsif @board.draw == true
         banner_msg("It's a Draw")
@@ -34,27 +35,30 @@ class Game
     end
   end
 
-  def reset
-    
+  def players_initialize
+    player1 = Player.new(@display.player_name(1))
+    player2 = Player.new(@display.player_name(2))
+    player1.symbol = @display.player_symbol(player1.name)
+    player2.symbol = player1.oposite_symbol
+    @players = [player1, player2]
+  end
 
+  def reset
+    players_initialize if @players.empty?
+    @board.reset
+    @players[0].reset
+    @players[1].reset
   end
 
   def next_move
-    puts "Turn to: #{@players[@turn_toplay]}, insert a digit"
-    played = gets.chomp
-    if played.to_i != 0 && played.to_i < 10
-      valid = @board.choose(played.to_i, @symbols[@turn_toplay])
-    else
-      puts banner_msg('Invalid entry!')
-      return false
+    move = @display.ask_play(@players[@turn_toplay].name, @board.played)
+
+    unless move.nil?
+      @players[@turn_toplay].choose(move)
+      return true
     end
 
-    if valid
-      @playermoves[@turn_toplay].push(played.to_i)
-      return true
-    else
-      return false
-    end
+    false
   end
 
   def switch_turn
@@ -80,25 +84,4 @@ class Game
     @board.choice(number)
   end
 
-  def ask_playagain
-    display.ask_playagain
-    playagain_ans = display.console_data
-    return true if playagain_ans.upcase == 'Y'
-
-    return false if playagain_ans.upcase == 'N'
-
-    display.invalid_response
-    nil
-  end
-
-  def ask_sameplayers
-    display.ask_playagain
-    sameplayers_ans = display.console_data
-    return true if sameplayers_ans.upcase == 'Y'
-
-    return false if sameplayers_ans.upcase == 'N'
-
-    display.invalid_response
-    nil
-  end
 end

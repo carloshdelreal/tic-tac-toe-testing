@@ -28,14 +28,20 @@ class Board
     false
   end
 
-  def checking(arr)
+  def winner?(arr)
     @winning.each do |x|
-      return true if contains_all?(arr, x)
+      return true if arr.contains_all?(x)
     end
     false
   end
 
   def reset
     @played = []
+  end
+
+  def draw
+    return true if contains_all?(@played, @board_numbers)
+
+    false
   end
 end
