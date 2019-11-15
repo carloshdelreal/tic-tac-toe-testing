@@ -1,42 +1,67 @@
+# frozen_string_literal: true
+
 RSpec.describe Board do
-  describe '#reset_board' do
-    it 'Will check if board is reseted' do
-      board = Game.new
-      board.reset_board
-      expect(board.board.board).to eql([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+  describe 'Choose Values' do
+    before(:example) do
+      @board = Board.new
     end
-
-    it 'Will check if player moves are reseted' do
-      board = Game.new
-      board.reset_board
-      expect(board.playermoves).to eql([[], []])
+    it 'Chooses 1' do
+      @board.choose(1)
+      expect(@board.played).to include(1)
+    end
+    it 'Choose 1 twice' do
+      @board.choose(1)
+      @board.choose(1)
+      expect(@board.played.count(1)).to eql(1)
+    end
+    it 'Choose ""' do
+      expect(@board.played.length).to eql(0)
+      @board.choose('')
+      expect(@board.played.length).to eql(0)
+    end
+    it 'Choose "helo"' do
+      expect(@board.played.length).to eql(0)
+      @board.choose('helo')
+      expect(@board.played.length).to eql(0)
+    end
+    it 'returns the valid number' do
+      expect(@board.choose(2)).to eql(2)
+    end
+    it 'returns nil if invalid number' do
+      @board.choose(1)
+      expect(@board.choose(1)).to eql(nil)
     end
   end
 
-  describe 'checking' do
-    it 'Will check if a player won the board' do
-      board = Board.new
-      expect(board.checking([1, 5, 9])).to eql(true)
+  describe 'Board Valid Numbers' do
+    before(:example) do
+      @board = Board.new
+    end
+    it 'Reject any string' do
+      expect(@board.valid_number?('')).to eql(false)
+      expect(@board.valid_number?('hello')).to eql(false)
+      expect(@board.valid_number?('bad')).to eql(false)
     end
 
-    it 'Will check if a player won the board another combination' do
-      board = Board.new
+    it 'reject nil' do
+      expect(@board.valid_number?(nil)).to eql(false)
+    end
 
-      expect(board.checking([3, 6, 9])).to eql(true)
+    it 'reject if already choosed' do
+      @board.choose(1)
+      expect(@board.valid_number?(1)).to eql(false)
     end
   end
-
-  describe '#no_int' do
-    it 'There are not ints in the array' do
-      game = Game.new
-      game.board.board = [%w[X X O], %w[X X O], %w[X X O]]
-      expect(game.board.draw).to eql(true)
+  describe 'board reset' do
+    before(:example) do
+      @board = Board.new
     end
-    
-    it 'There are not ints in the array' do
-      game = Game.new
-      game.board.board = [%w[X X O], %w[X X O], ['X', 'X', 9]]
-      expect(game.board.draw).to eql(false)
+    it 'choose values an then reset' do
+      @board.choose(1)
+      @board.choose(2)
+      @board.choose(3)
+      @board.reset
+      expect(@board.played).to eql([])
     end
   end
 end
